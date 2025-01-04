@@ -1,29 +1,6 @@
 import {   recognizeExistance, sleep } from "./src/utils"
 import { balances_display, gather_display, main_menu_display, prepare_bundle_display, rl, screen_clear, security_checks_display, token_holders_display, token_launch_display, token_sell_buy_display } from "./menu/menu";
-import { create_token } from "./layout/createToken";
-import { create_market } from "./layout/createMarket";
-import { bundle_pool_buy } from "./layout/poolBuy";
-import { burn_lp } from "./src/burnLp";
-import { manual_part_sell } from "./layout/manualPartSell";
-import { wallet_create } from "./layout/walletCreate";
-import { create_atas } from "./layout/createAta";
-import { simulate } from "./layout/simulation";
-import { sol_gather } from "./layout/solGather";
-import { create_extend_lut } from "./layout/createLut";
-import { remove_liquidity } from "./layout/removeLiquidity";
-import { manual_rebuy } from "./layout/manualRebuy";
-import { holder_distribute } from "./layout/holderDistribute";
-import { holder_create } from "./layout/holderCreate";
-import { holder_gather_all } from "./layout/holderGatherAll";
-import { holder_gather_some } from "./layout/holderGatherSome";
-import { show_bundlers } from "./layout/showBundlerBalance";
-import { sol_distribute } from "./layout/solDistribute";
-import { presimulate } from "./layout/preSimulate";
-import { revokeMintAuthority } from "./src/revokeMintAuthority";
-import { revokeFreezeAuthority } from "./src/revokeFreezeAuthority";
-import { show_holders } from "./layout/showHolderBalance";
-import { manual_each_sell } from "./layout/manualEachSell";
-import { each_sol_gather } from "./layout/eachSolGather";
+
 import TelegramBot, { Message, ParseMode, SendMessageOptions }  from "node-telegram-bot-api";
 import { token_information } from "./layout/token_information";
 // import { sol_distribute } from "./layout/solDistribute";
@@ -89,6 +66,7 @@ export const optionMenu: SendMessageOptions= {
       ],
   },
 };
+
 export const optionPreMenu: SendMessageOptions = {
   reply_markup: {
       inline_keyboard: [
@@ -192,7 +170,6 @@ export const optionBack: SendMessageOptions = {
   },
 };
 
-
 bot.onText(/\/start/, (msg: Message) => {
   chatId = msg.chat.id;
   const userID = msg.from?.id;
@@ -238,6 +215,93 @@ bot.on("callback_query", (callbackQuery) => {
       break;
     case 'Balance_bundlers_holders':
       balances();
+      break;
+    case 'Pre_simulate':
+      presimulate();
+      break;
+    case 'Create_Token':
+      create_token();
+      break;
+    case 'Security_Checks':
+      security_checks();
+      break;
+    case 'Create_Market':
+      create_market();
+      break;
+    case 'Prepare_Bundle':
+      prepare_bundle();
+      break;
+    case 'Create_holder_wallets':
+      holder_create()
+      break;
+    case 'Create_Pool_bundleBuy':
+      bundle_pool_buy();
+      break;
+    case 'Burn_LP':
+      burn_lp();
+      break;
+    case 'revokeMintAuthority':
+      revokeMintAuthority();
+      break;
+    case 'revokeFreezeAuthority':
+      revokeFreezeAuthority();
+      break;
+    case 'BackToTokenLaunch':
+      token_launch();
+      break;
+    case 'wallet_create':
+      wallet_create();
+      break;
+    case 'create_atas':
+      create_atas();
+      break;
+    case 'create_extend_lut':
+      create_extend_lut();
+      break;
+    case 'simulate':
+      simulate();
+      break;
+    case 'BackToTokenLaunch':
+      token_launch();
+      break;
+    case 'Distribute_HolderWallets':
+      holder_distribute()
+      break;
+    case 'Gather_selected':
+      holder_gather_some()
+      break;
+    case 'Gather_all':
+      holder_gather_all()
+      break;
+    case 'Sell_partially':
+      manual_part_sell();
+      break;
+    case 'Sell_each_Bundler':
+      manual_each_sell();
+      break;
+    case 'Rebuy_partially':
+      manual_rebuy();
+      break;
+    case 'Remove_liquidity':
+      remove_liquidity();
+      break;
+    case 'Gather_from_all':
+      sol_gather();
+      break;
+    case 'Gather_from_one':
+      each_sol_gather();
+      break;
+    case 'Distribute_sol_to_bundlers':
+      sol_distribute();
+      break;
+    case 'Show_bundlers':
+      show_bundlers();
+      break;
+    case 'Show_holders':
+      show_holders();
+      break;
+    case 'Token_Information':
+      token_information();
       break;
     case 'Back':
       init();
@@ -378,5 +442,170 @@ export const token_holders = () => {
 
 }
 
+export const sell_buy = () => {
+  // screen_clear();
+  // BotSendMessage("Token Sell & Buy")
+  // token_sell_buy_display();
+
+  // rl.question("\t[Token Sell & Buy] - Choice: ", (answer: string) => {
+  //   let choice = parseInt(answer);
+  //   switch (choice) {
+  //     case 1:
+  //       manual_part_sell();
+  //       break;
+  //     case 2:
+  //       manual_each_sell();
+  //       break;
+  //     case 3:
+  //       manual_rebuy();
+  //       break;
+  //     case 4:
+  //       remove_liquidity();
+  //       break;
+  //     case 5:
+  //       init();
+  //       break;
+  //     case 6:
+  //       process.exit(1);
+  //     default:
+  //       BotSendMessage("\tInvalid choice!");
+  //       sleep(1500);
+  //       sell_buy();
+  //       break;
+  //   }
+  // })
+  BotMessageOptions("\t[Token Sell & Buy] - Choice: ", optionSellBuy );
+  
+}
+
+export const gather = () => {
+  // screen_clear();
+  // BotSendMessage("Gathering...")
+  // gather_display();
+
+  // rl.question("\t[Gather Options] - Choice: ", (answer: string) => {
+  //   let choice = parseInt(answer);
+  //   switch (choice) {
+  //     case 1:
+  //       sol_gather();
+  //       break;
+  //     case 2:
+  //       each_sol_gather();
+  //       break;
+  //     case 3:
+  //       sol_distribute();
+  //       break;
+  //     case 4:
+  //       init();
+  //       break;
+  //     case 5:
+  //       process.exit(1);
+  //     default:
+  //       BotSendMessage("\tInvalid choice!");
+  //       sleep(1500);
+  //       gather();
+  //       break;
+  //   }
+  // })
+  BotMessageOptions("\t[Gather Options] - Choice: ", optionGather );
+
+}
+
+export const balances = () => {
+  // screen_clear();
+  // BotSendMessage("Balance Checks")
+  // balances_display();
+
+  // rl.question("\t[Balance Checks] - Choice: ", (answer: string) => {
+  //   let choice = parseInt(answer);
+  //   switch (choice) {
+  //     case 1:
+  //       show_bundlers();
+  //       break;
+  //     case 2:
+  //       show_holders();
+  //       break;
+  //     case 3:
+  //       init();
+  //       break;
+  //     case 4:
+  //       process.exit(1);
+  //     default:
+  //       BotSendMessage("\tInvalid choice!");
+  //       sleep(1500);
+  //       balances();
+  //       break;
+  //   }
+  // })
+  BotMessageOptions("\t[Balance Checks] - Choice: ", optionBalance );
+
+}
+
+export const security_checks = () => {
+  // screen_clear();
+  // BotSendMessage("Security Checks")
+  // security_checks_display();
+
+  // rl.question("\t[Security Checks] - Choice: ", (answer: string) => {
+  //   let choice = parseInt(answer);
+  //   switch (choice) {
+  //     case 1:
+  //       revokeMintAuthority();
+  //       break;
+  //     case 2:
+  //       revokeFreezeAuthority();
+  //       break;
+  //     case 3:
+  //       token_launch();
+  //       break;
+  //     case 4:
+  //       process.exit(1);
+  //     default:
+  //       BotSendMessage("\tInvalid choice!");
+  //       sleep(1500);
+  //       security_checks();
+  //       break;
+  //   }
+  // })
+  BotMessageOptions("\t[Security Checks] - Choice: ", optionSecurityChecks );
+
+}
+
+export const prepare_bundle = () => {
+  // screen_clear();
+  // BotSendMessage("Security Checks")
+  // prepare_bundle_display();
+
+  // rl.question("\t[Security Checks] - Choice: ", (answer: string) => {
+  //   let choice = parseInt(answer);
+  //   switch (choice) {
+  //     case 1:
+  //       wallet_create();
+  //       break;
+  //     case 2:
+  //       create_atas();
+  //       break;
+  //     case 3:
+  //       create_extend_lut();
+  //       break;
+  //     case 4:
+  //       simulate();
+  //       break;
+  //     case 5:
+  //       token_launch();
+  //       break;
+  //     case 6:
+  //       process.exit(1);
+  //     default:
+  //       BotSendMessage("\tInvalid choice!");
+  //       sleep(1500);
+  //       prepare_bundle();
+  //       break;
+  //   }
+  // })
+
+  BotMessageOptions("\t[Prepare Bundle] - Choice: ", optionPrepareBundle );
+
+}
 
 // init()
