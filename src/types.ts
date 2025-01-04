@@ -1,0 +1,81 @@
+import { LiquidityPoolKeysV4 } from "@raydium-io/raydium-sdk"
+import { Keypair, PublicKey } from "@solana/web3.js"
+import { web3 } from "@project-serum/anchor"
+import { RawMint } from "@solana/spl-token"
+
+
+export interface UserToken {
+  name: string
+  symbol: string
+  decimals: number
+  description: string
+  uiAmount: number
+  image: string
+  extensions?: Extension
+  tags?: string[]
+  creator?: Creator
+}
+
+interface Extension {
+  website?: string
+  twitter?: string
+  telegram?: string
+  LinkTree?: string
+}
+
+export interface Metadata {
+  name: string
+  symbol: string
+  description: string
+  image: string
+  extensions?: Extension
+  tags?: string[]
+  creator?: Creator
+}
+
+export interface Creator {
+  name: string
+  site: string
+}
+
+export interface PoolInfo {
+  mint: null | PublicKey
+  marketId: null | PublicKey
+  poolId: null | PublicKey
+  mainKp: null | string
+  poolKeys: null | LiquidityPoolKeysV4
+  removed: null | boolean
+}
+
+export interface TokenInfo {
+  Name: string
+  Symbol: string
+  Supply: number
+  Decimals: number
+  Description: string
+  Social_links?: Extension
+  Tags?: string[]
+  Contract_Address: null | PublicKey
+}
+
+export interface PoolInfoStr {
+  mint: null | string
+  marketId: null | string
+  poolId: null | string
+  mainKp: null | string
+  poolKeys: null | any
+  removed: null | boolean
+}
+
+export type BaseRayInput = {
+    rpcEndpointUrl: string
+}
+export type Result<T, E = any | undefined> = {
+    Ok?: T,
+    Err?: E
+}
+export type MPLTokenInfo = {
+    address: web3.PublicKey
+    mintInfo: RawMint,
+    metadata: any
+}
