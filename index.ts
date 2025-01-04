@@ -89,7 +89,108 @@ export const optionMenu: SendMessageOptions= {
       ],
   },
 };
+export const optionPreMenu: SendMessageOptions = {
+  reply_markup: {
+      inline_keyboard: [
+          [{ text: "💎 Token Launch", callback_data: "Token_Launch" }, { text: "💸 Token Holders", callback_data: "Token_Holders" }],
+          [{ text: "💱 Token Sell & Buy", callback_data: "Token_Sell_Buy" }],
+          // [{ text: "[2] - Token Holders", callback_data: "Token_Holders" }],
+          [ { text: "💰 Gather Sol from bundler wallets", callback_data: "Gather_Sol_bundler_wallet" }],
+          // [{ text: "[4] - Gather Sol from bundler wallets", callback_data: "Gather_Sol_bundler_wallet" }],
+          [{ text: "🏆 Balance of bundlers and holders", callback_data: "Balance_bundlers_holders" }],
+          [{ text: "❌ Exit", callback_data: "Exit" }],
+      ],
+  },
+};
+export const optionTokenLaunch: SendMessageOptions = {
+  reply_markup: {
+      inline_keyboard: [
+          // [{ text: "✍Pre simulate", callback_data: "Pre_simulate" }, { text: "👷‍♂️Create Token", callback_data: "Create_Token" }],
+          [{ text: "👷‍♂️Create Token", callback_data: "Create_Token" }],
+          [{ text: "🔐 Security checks", callback_data: "Security_Checks" }],
+          [{ text: "Create Market", callback_data: "Create_Market" }],
+          [{ text: "Prepare for Bundle", callback_data: "Prepare_Bundle" }],
+          // [{ text: "💰 Create holder wallets", callback_data: "Create_holder_wallets" },{ text: "Create Pool And BundleBuy", callback_data: "Create_Pool_bundleBuy" },{ text: "Burn LP token", callback_data: "Burn_LP" }],
+          [{ text: "💰 Create holder wallets", callback_data: "Create_holder_wallets" }],
+          [{ text: "Create Pool And BundleBuy", callback_data: "Create_Pool_bundleBuy" }],
+          [{ text: "Burn LP token", callback_data: "Burn_LP" }],
+          [{ text: "👈 Back", callback_data: "Back" }, { text: "❌ Exit", callback_data: "Exit" }],
+        ],
+  },
 
+};
+export const optionSecurityChecks: SendMessageOptions = {
+  reply_markup: {
+      inline_keyboard: [
+          [{ text: "Remove Mint Authority", callback_data: "revokeMintAuthority" }],
+          [{ text: "Freeze Authority", callback_data: "revokeFreezeAuthority" }],
+          [{ text: "👈 Back", callback_data: "BackToTokenLaunch" }, { text: "❌ Exit", callback_data: "Exit" }],
+      ],
+  },
+};
+export const optionPrepareBundle: SendMessageOptions = {
+  reply_markup: {
+      inline_keyboard: [
+        [{ text: "Wallet Create", callback_data: "wallet_create" }],
+        [{ text: "Create AssociatedTokenAccounts", callback_data: "create_atas" }],
+        [{ text: "Create LUT", callback_data: "create_extend_lut" }],
+        [{ text: "Extend and Simulate tx size", callback_data: "simulate" }],
+        [{ text: "👈 Back", callback_data: "BackToTokenLaunch" }, { text: "❌ Exit", callback_data: "Exit" }],
+      ],
+  },
+};
+export const optionTokenHolders: SendMessageOptions = {
+  reply_markup: {
+      inline_keyboard: [
+          [{ text: "Distribute Token to HolderWallets", callback_data: "Distribute_HolderWallets" }],
+          [{ text: "Gather selected Token to BundlerWallets", callback_data: "Gather_selected" }],
+          [{ text: "Gather all Token to BundlerWallets", callback_data: "Gather_all" }],
+          [{ text: "👈 Back", callback_data: "Back" }, { text: "❌ Exit", callback_data: "Exit" }],
+
+      ],
+  },
+};
+export const optionSellBuy: SendMessageOptions = {
+  reply_markup: {
+      inline_keyboard: [
+          [{ text: "Sell tokens partially", callback_data: "Sell_partially" }],
+          [{ text: "Sell tokens from each Bundler", callback_data: "Sell_each_Bundler" }],
+          [{ text: "Rebuy tokens partially", callback_data: "Rebuy_partially" }],
+          [{ text: "Remove liquidity", callback_data: "Remove_liquidity" }],
+          [{ text: "👈 Back", callback_data: "Back" }, { text: "❌ Exit", callback_data: "Exit" }],
+
+      ],
+  },
+};
+export const optionGather: SendMessageOptions = {
+  reply_markup: {
+      inline_keyboard: [
+          [{ text: "Gather Sol from all bundler wallets", callback_data: "Gather_from_all" }],
+          [{ text: "Gather Wsol from one bundler wallet", callback_data: "Gather_from_one" }],
+          [{ text: "Distribute sol to bundlers", callback_data: "Distribute_sol_to_bundlers" }],
+          [{ text: "👈 Back", callback_data: "Back" }, { text: "❌ Exit", callback_data: "Exit" }],
+
+      ],
+  },
+};
+export const optionBalance: SendMessageOptions = {
+  reply_markup: {
+      inline_keyboard: [
+          [{ text: "Show sol & token balances of bundlers", callback_data: "Show_bundlers" }],
+          [{ text: "Show sol & token balances of holders", callback_data: "Show_holders" }],
+          [{ text: "👈 Back", callback_data: "Back" }, { text: "❌ Exit", callback_data: "Exit" }],
+
+      ],
+  },
+};
+export const optionBack: SendMessageOptions = {
+  disable_web_page_preview: true,
+  reply_markup: {
+      inline_keyboard: [
+          [{ text: "👈 Back", callback_data: "Back" }, { text: "❌ Exit", callback_data: "Exit" }]
+      ],
+  },
+};
 
 
 bot.onText(/\/start/, (msg: Message) => {
